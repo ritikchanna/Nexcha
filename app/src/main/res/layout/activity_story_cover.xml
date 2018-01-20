@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cover_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/storyCover"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ff000000"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/storyCover_imageview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/imageViewGradient"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="false"
+            android:scaleType="fitXY"
+            android:src="@drawable/cover_gradient"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="0.5">
+
+                <Button
+                    android:id="@+id/showActionBarButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200.0dip"
+                    android:layout_alignParentTop="true"
+                    android:background="@android:color/transparent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:id="@+id/textview_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="150.0dip"
+                    android:layout_marginLeft="20.0dip"
+                    android:text=""
+                    android:textColor="#ffffffff"
+                    android:textSize="20.0sp" />
+
+                <TextView
+                    android:id="@+id/textview_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="135.0dip"
+                    android:layout_marginLeft="20.0dip"
+                    android:text=""
+                    android:textColor="#ffffffff"
+                    android:textSize="14.0sp" />
+
+                <TextView
+                    android:id="@+id/textview_episodes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30.0dip"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="96.0dip"
+                    android:layout_marginLeft="20.0dip"
+                    android:clickable="true"
+                    android:text=""
+                    android:textColor="#ffffffff"
+                    android:textSize="14.0sp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/storyReadCountImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignTop="@+id/textview_author"
+                    android:layout_marginLeft="80.0dip"
+                    android:layout_marginTop="34.0dip"
+                    app:srcCompat="@drawable/icon_reads" />
+
+                <TextView
+                    android:id="@+id/textview_views"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignTop="@+id/textview_author"
+                    android:layout_marginLeft="104.0dip"
+                    android:layout_marginTop="29.0dip"
+                    android:text=""
+                    android:textColor="#ffffffff"
+                    android:textSize="14.0sp" />
+
+                <ImageView
+                    android:id="@+id/imageButton"
+                    android:layout_width="35.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5.0dip"
+                    android:clickable="true"
+                    android:src="@drawable/arrow_blue_down2" />
+
+                <TextView
+                    android:id="@+id/textview_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignTop="@+id/textview_views"
+                    android:layout_marginLeft="20.0dip"
+                    android:layout_marginTop="26.0dip"
+                    android:text=""
+                    android:textColor="#ffffffff"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutProgressBar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#aa000000"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="disableTouch"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/storyCover_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="false" />
+    </RelativeLayout>
+</RelativeLayout>

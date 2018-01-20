@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ritik.nexcha">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+        tools:replace="android:icon">
+        <activity
+            android:name="ritik.nexcha.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ritik.nexcha.Story_cover"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.nexcha.tk"
+                    android:pathPrefix="/app"
+                    android:scheme="http" />
+                <data
+                    android:host="nexcha.tk"
+                    android:pathPrefix="/app"
+                    android:scheme="http" />
+                <data
+                    android:host="app"
+                    android:scheme="nexcha" />
+
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name="ritik.nexcha.ChatScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ritik.nexcha.SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="ritik.nexcha.EndActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+    </application>
+
+</manifest>

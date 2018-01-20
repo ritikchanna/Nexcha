@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_popular"
+                    android:icon="@drawable/icon_popular"
+                    android:title="Popular" />
+                <item
+                    android:id="@+id/nav_reading"
+                    android:icon="@drawable/icon_reading"
+                    android:title="Reading" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Genres">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_genre_scifi"
+                    android:icon="@drawable/icon_sci_fi"
+                    android:title="Sci-fi" />
+                <item
+                    android:id="@+id/nav_genre_love"
+                    android:icon="@drawable/icon_love"
+                    android:title="Love" />
+                <item
+                    android:id="@+id/nav_genre_comedy"
+                    android:icon="@drawable/icon_comedy"
+                    android:title="Comedy" />
+                <item
+                    android:id="@+id/nav_genre_drama"
+                    android:icon="@drawable/icon_drama"
+                    android:title="Drama" />
+                <item
+                    android:id="@+id/nav_genre_thriller"
+                    android:icon="@drawable/icon_thriller"
+                    android:title="Thriller" />
+                <item
+                    android:id="@+id/nav_genre_horror"
+                    android:icon="@drawable/icon_horror"
+                    android:title="Horror" />
+                <item
+                    android:id="@+id/nav_genre_paranormal"
+                    android:icon="@drawable/icon_paranormal"
+                    android:title="Paranormal" />
+                <item
+                    android:id="@+id/nav_genre_fantasy"
+                    android:icon="@drawable/icon_fantasy"
+                    android:title="Fantasy" />
+                <item
+                    android:id="@+id/nav_genre_mystery"
+                    android:icon="@drawable/icon_mystery"
+                    android:title="Mystery" />
+            </group>
+        </menu>
+    </item>
+</menu>
