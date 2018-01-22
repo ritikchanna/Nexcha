@@ -15,10 +15,10 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:replace="android:icon">
         <activity
-            android:name="ritik.nexcha.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ritik.nexcha.Story_cover"
+            android:name=".Story_cover"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter android:label="@string/app_name">
@@ -38,27 +38,49 @@
                 <data
                     android:host="app"
                     android:scheme="nexcha" />
-
             </intent-filter>
-
         </activity>
         <activity
-            android:name="ritik.nexcha.ChatScreen"
+            android:name=".ChatScreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ritik.nexcha.SplashActivity"
+            android:name=".SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="ritik.nexcha.EndActivity"
+            android:name=".EndActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Window"></activity>
     </application>
 
 </manifest>

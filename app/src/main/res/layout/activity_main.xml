@@ -26,6 +26,51 @@
         app:theme="@style/Navigationdrawer">
 
 
+        <RelativeLayout
+            android:id="@+id/userLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/avatarImageView"
+                android:layout_width="50dp"
+
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/guest_profile" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@id/avatarImageView"
+                android:paddingTop="5dp"
+                android:text="@string/guest"
+                android:textColor="#ffffff"
+                android:textSize="19sp"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@id/avatarImageView"
+                android:layout_weight="2"
+                android:paddingBottom="15dp"
+                android:text="@string/tap_to_login"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                tools:text="email" />
+
+        </RelativeLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -2,10 +2,15 @@ package ritik.nexcha;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,8 +23,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.charbgr.BlurNavigationDrawer.v7.BlurActionBarDrawerToggle;
+import com.facebook.Profile;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,12 +47,16 @@ import static ritik.nexcha.Constants.SERVER_URL;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    final int LOGIN_REQUEST_CODE = 99;
     DatabaseHandler db;
     GridAdapter adapter;
     RecyclerView recyclerView;
     FloatingActionButton fab;
     String current_category;
     Intent i;
+    RelativeLayout userLayout;
+    TextView user_name, user_email;
+    ImageView user_pic;
     private ArrayList<GridItem> story;
     private SwipeRefreshLayout swipeContainer;
 
@@ -48,11 +64,15 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         db = new DatabaseHandler(this);
 
+        user_name = findViewById(R.id.user_name);
+        user_email = findViewById(R.id.user_email);
+        userLayout = findViewById(R.id.userLayout);
+        user_pic = findViewById(R.id.avatarImageView);
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer = findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -70,36 +90,37 @@ public class MainActivity extends AppCompatActivity
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 if (!drawer.isDrawerOpen(GravityCompat.START))
                     drawer.openDrawer(GravityCompat.START);
             }
         });
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new BlurActionBarDrawerToggle(
                 this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         i = new Intent(this, Story_cover.class);
         story = new ArrayList<GridItem>();
         initViews();
 
+
     }
 
 
     private void initViews() {
-        recyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
+        recyclerView = findViewById(R.id.card_recycler_view);
         //recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -120,7 +141,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == recyclerView.SCROLL_STATE_IDLE)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
                     fab.show();
                 else
                     fab.hide();
@@ -150,7 +171,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -286,17 +307,16 @@ public class MainActivity extends AppCompatActivity
             fab.setImageResource(R.drawable.icon_reading);
             current_category = "reading";
 
-        }
-        //TODO Add categories like populor
-        else {
-            //TODO default genre here
+
+        } else {
+
             story = db.getStoriesbygenre("popular");
             fab.setImageResource(R.drawable.icon_popular);
             current_category = "popular";
         }
         adapter.clear();
         adapter.addAll(story);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
     }
@@ -347,5 +367,172 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("Ritik", "onActivityResult: " + requestCode + "  " + resultCode);
+        if (requestCode == LOGIN_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                String userimage = null;
+                try {
+                    Log.d("Ritik", "onActivityResult: Account type " + data.getExtras().getInt("account_type"));
+                    if (data.getExtras().getInt("account_type") == 1) {
+                        Log.d("Ritik", "onActivityResult: BP1");
+                        Profile profile = Profile.getCurrentProfile();
+                        Log.d("Ritik", "onActivityResult: BP2");
+                        user_name.setText(profile.getName());
+                        userimage = profile.getProfilePictureUri(200, 200).toString();
+                        //todo change to email
+                        user_email.setText(profile.getId());
+
+                    } else if (data.getExtras().getInt("account_type") == 2) {
+                        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
+                        user_name.setText(acct.getDisplayName());
+                        user_email.setText(acct.getEmail());
+                        userimage = acct.getPhotoUrl().toString();
+
+                    }
+
+                    if (userimage != null) {
+
+                        Picasso.Builder builder = new Picasso.Builder(this);
+                        builder.listener(new Picasso.Listener() {
+                            @Override
+                            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                                exception.printStackTrace();
+
+                            }
+                        });
+
+
+                        builder.build().load(userimage)
+                                .placeholder(R.drawable.loading)
+                                .error(R.drawable.error)
+                                .rotate(0)
+                                .into(user_pic, new com.squareup.picasso.Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        Bitmap imageBitmap = ((BitmapDrawable) user_pic.getDrawable()).getBitmap();
+                                        RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
+                                        imageDrawable.setCircular(true);
+                                        imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                                        user_pic.setImageDrawable(imageDrawable);
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        user_pic.setImageResource(R.drawable.guest_profile);
+
+                                    }
+                                });
+
+                    }
+
+
+                } catch (Exception e) {
+                    Log.e("Ritik", "onActivityResult: No account_type");
+                    e.printStackTrace();
+                }
+            } else {
+                Profile profile = Profile.getCurrentProfile();
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
+                if (profile == null && acct == null) {
+                    user_name.setText(getString(R.string.guest));
+                    user_email.setText(getString(R.string.tap_to_login));
+                    user_pic.setImageResource(R.drawable.guest_profile);
+
+                }
+
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+
+
+        if (user_name.getText().equals(getString(R.string.guest))) {
+            userLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                    startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), LOGIN_REQUEST_CODE);
+                }
+            });
+        } else {
+            //todo show user's post
+            //userLayout.setOnClickListener(null);
+        }
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        String userimage = null;
+        Profile profile = Profile.getCurrentProfile();
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
+        if (profile != null) {
+            Log.d("Ritik", "onResume: profile not null");
+            user_name.setText(profile.getName());
+            userimage = profile.getProfilePictureUri(200, 200).toString();
+            //todo change to email
+            user_email.setText(profile.getId());
+            Log.d("Ritik", "facebook profile pic : " + userimage);
+
+        } else if (acct != null) {
+            Log.d("Ritik", "onResume: google not  null");
+            user_name.setText(acct.getDisplayName());
+            user_email.setText(acct.getEmail());
+            userimage = acct.getPhotoUrl().toString();
+        } else {
+            Log.d("Ritik", "onResume: not logged in");
+            user_name.setText(getString(R.string.guest));
+            user_email.setText(getString(R.string.tap_to_login));
+            user_pic.setImageResource(R.drawable.guest_profile);
+        }
+        if (userimage != null) {
+
+            Picasso.Builder builder = new Picasso.Builder(this);
+            builder.listener(new Picasso.Listener() {
+                @Override
+                public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                    exception.printStackTrace();
+
+                }
+            });
+
+            builder.build().load(userimage)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
+                    .rotate(0)
+                    .into(user_pic, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                            Bitmap imageBitmap = ((BitmapDrawable) user_pic.getDrawable()).getBitmap();
+                            RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
+                            imageDrawable.setCircular(true);
+                            imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                            user_pic.setImageDrawable(imageDrawable);
+                        }
+
+                        @Override
+                        public void onError() {
+                            user_pic.setImageResource(R.drawable.guest_profile);
+
+                        }
+                    });
+
+        }
+        //TODO change onclicklistner
+        userLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), LOGIN_REQUEST_CODE);
+            }
+        });
+        super.onStart();
     }
 }

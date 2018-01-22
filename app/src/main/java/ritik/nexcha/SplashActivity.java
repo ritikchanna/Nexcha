@@ -44,9 +44,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        logo = (ImageView) findViewById(R.id.splash_imageView);
+        logo = findViewById(R.id.splash_imageView);
 
-        constraintLayout = (ConstraintLayout) findViewById(R.id.splash_constraint);
+        constraintLayout = findViewById(R.id.splash_constraint);
         db = new DatabaseHandler(this);
         i = new Intent(SplashActivity.this, MainActivity.class);
         alertDialogbuilder = new AlertDialog.Builder(SplashActivity.this);
@@ -76,7 +76,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (!isNetworkAvailable(SplashActivity.this)) {
                     Snackbar snackbar = Snackbar.make(constraintLayout, "Offline ! Go Online to get new stories !!", Snackbar.LENGTH_INDEFINITE);
                     snackbar.show();
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } else {
                     OkHttpClient client = new OkHttpClient();
 
@@ -105,6 +105,7 @@ public class SplashActivity extends AppCompatActivity {
                     db.updateviews(response.body().string());
 
 
+                    new Helper().refreshuser(SplashActivity.this);
                     urlbuilder = HttpUrl.parse(SERVER_URL).newBuilder();
                     urlbuilder.addQueryParameter("op", "getversion");
                     url_built = urlbuilder.build().toString();
@@ -114,10 +115,10 @@ public class SplashActivity extends AppCompatActivity {
                             .build();
                     response = client.newCall(request).execute();
                     String latest_version = response.body().string();
+                    Log.d("Ritik", "APP_VERSION " + APP_VERSION + "    fetched version   " + latest_version);
                     if (!latest_version.equals(APP_VERSION)) {
                         Log.d("Ritik", "doInBackground: " + APP_VERSION);
-
-                        if (latest_version.charAt(0) == 'M') {
+                        if (latest_version.charAt(1) == 'M') {
 
 
                             alertDialogbuilder.setMessage("Update the application in order to continue using the app !!");
