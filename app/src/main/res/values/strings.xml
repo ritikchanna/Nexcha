@@ -11,4 +11,5 @@
     <string name="login_fail">Login Failed, Please try again later</string>
     <string name="tap_to_login">Tap to Login</string>
     <string name="guest">Guest</string>
+    <string name="title_activity_create">CreateActivity</string>
 </resources>

@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (category.equals("create")) {
-            //todo add intent to create activity
+            startActivity(new Intent(MainActivity.this, CreateActivity.class));
 
 
         } else {

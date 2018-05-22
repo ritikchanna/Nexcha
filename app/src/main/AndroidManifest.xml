@@ -15,10 +15,10 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:replace="android:icon">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Story_cover"
+            android:name=".Activity.Story_cover"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter android:label="@string/app_name">
@@ -41,10 +41,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChatScreen"
+            android:name=".Activity.ChatScreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activity.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EndActivity"
+            android:name=".Activity.EndActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
 
@@ -79,8 +79,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Window"></activity>
+            android:name=".Activity.LoginActivity"
+            android:theme="@style/Window" />
+        <activity
+            android:name=".Activity.CreateActivity"
+            android:label="@string/title_activity_create"></activity>
     </application>
 
 </manifest>
