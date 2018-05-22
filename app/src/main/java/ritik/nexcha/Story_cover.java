@@ -67,7 +67,7 @@ public class Story_cover extends AppCompatActivity {
         onNewIntent(getIntent());
         alertbuilder = new AlertDialog.Builder(this);
         storyIndexed = db.Ischatindexed(Integer.parseInt(chat_uid));
-        progressBar = (RelativeLayout) findViewById(R.id.layoutProgressBar);
+        progressBar = findViewById(R.id.layoutProgressBar);
         android_gesture_detector = new Gesture_Detector();
         mGestureDetector = new GestureDetector(this, android_gesture_detector);
 //        progressBar.setOnClickListener(new View.OnClickListener() {
@@ -77,14 +77,14 @@ public class Story_cover extends AppCompatActivity {
 //            }
 //        });
         progressBar.setClickable(false);
-        eye_icon = (ImageView) findViewById(R.id.storyReadCountImg);
-        arrow = (ImageView) findViewById(R.id.imageButton);
-        textView_title = (TextView) findViewById(R.id.textview_title);
-        story_cover = (ImageView) findViewById(R.id.storyCover_imageview);
-        textView_author = (TextView) findViewById(R.id.textview_author);
-        textView_description = (TextView) findViewById(R.id.textview_description);
-        textView_episodes = (TextView) findViewById(R.id.textview_episodes);
-        textView_views = (TextView) findViewById(R.id.textview_views);
+        eye_icon = findViewById(R.id.storyReadCountImg);
+        arrow = findViewById(R.id.imageButton);
+        textView_title = findViewById(R.id.textview_title);
+        story_cover = findViewById(R.id.storyCover_imageview);
+        textView_author = findViewById(R.id.textview_author);
+        textView_description = findViewById(R.id.textview_description);
+        textView_episodes = findViewById(R.id.textview_episodes);
+        textView_views = findViewById(R.id.textview_views);
         alertbuilder.setMessage("Couldn't find the story you were looking for !!")
                 .setCancelable(false)
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
@@ -244,7 +244,7 @@ public class Story_cover extends AppCompatActivity {
             }
         });
 
-        builder.build().load(story.getImage())
+        builder.build().load(Constants.IMAGES_URL + story.getImage())
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .rotate(0)

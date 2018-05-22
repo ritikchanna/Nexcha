@@ -52,7 +52,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
             }
         });
         Log.d("Ritik", "onBindViewHolder: " + viewHolder.story_cover.getWidth());
-        builder.build().load(story.get(i).getImage())
+        builder.build().load(Constants.IMAGES_URL + story.get(i).getImage())
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .resize((int) dpWidth / 2, (int) dpWidth / 2)
@@ -87,9 +87,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
         public ViewHolder(View view) {
             super(view);
             //story_item=(LinearLayout)view.findViewById(R.id.grid_item);
-            story_title = (TextView) view.findViewById(R.id.grid_item_text);
-            story_cover = (ImageView) view.findViewById(R.id.grid_item_image);
-            story_author = (TextView) view.findViewById(R.id.grid_item_author);
+            story_title = view.findViewById(R.id.grid_item_text);
+            story_cover = view.findViewById(R.id.grid_item_image);
+            story_author = view.findViewById(R.id.grid_item_author);
         }
 
     }
