@@ -1,4 +1,4 @@
-package ritik.nexcha;
+package ritik.nexcha.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ritik.nexcha.DatabaseHandler;
+import ritik.nexcha.Message;
+import ritik.nexcha.R;
+
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
     private final LayoutInflater inflater;
     //Creating an arraylist of POJO objects
@@ -20,9 +24,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     View view;
     MyViewHolder holder;
     int chat_uid;
-    int sequence_last = 0;
+    public int sequence_last = 0;
     int lastPosition = 0;
-    Boolean endofchat = false;
+    public Boolean endofchat = false;
     Boolean typing = false;
     private Context context;
 
@@ -101,8 +105,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         public MyViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            name = (TextView) itemView.findViewById(R.id.user_name);
-            content = (TextView) itemView.findViewById(R.id.content);
+            name = itemView.findViewById(R.id.user_name);
+            content = itemView.findViewById(R.id.content);
 
         }
 

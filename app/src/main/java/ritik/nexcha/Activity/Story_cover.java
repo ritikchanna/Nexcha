@@ -1,4 +1,4 @@
-package ritik.nexcha;
+package ritik.nexcha.Activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,6 +29,10 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import ritik.nexcha.Constants;
+import ritik.nexcha.DatabaseHandler;
+import ritik.nexcha.GridItem;
+import ritik.nexcha.R;
 
 import static ritik.nexcha.Constants.SERVER_URL;
 

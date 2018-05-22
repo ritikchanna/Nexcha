@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fafafa"
-    tools:context="ritik.nexcha.ChatScreen">
+    tools:context="ritik.nexcha.Activity.ChatScreen">
 
     <Button
         android:id="@+id/chat_next_button"

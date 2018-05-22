@@ -110,7 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    GridItem getStory(int chat_uid) {
+    public GridItem getStory(int chat_uid) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_MAIN, new String[]{KEY_CHAT_UID,
@@ -123,7 +123,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return story;
     }
 
-    int getEpisodecount(String chat_uid) {
+    public int getEpisodecount(String chat_uid) {
         chat_uid = chat_uid.substring(0, chat_uid.length() - 1);
         String Query = "SELECT  * FROM " + TABLE_MAIN + " WHERE " + KEY_CHAT_UID + " LIKE '" + chat_uid + "_'";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -133,7 +133,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cnt;
     }
 
-    String getLastStory() {
+    public String getLastStory() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_MAIN, new String[]{"MAX(" + KEY_CHAT_UID + ")"}, null, null, null, null, null);
         if (cursor != null)
@@ -274,7 +274,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * All CRUD(Create, Read, Update, Delete) Operations
      */
-    Message getnextmsg(int chat_uid, int last_sequence) {
+    public Message getnextmsg(int chat_uid, int last_sequence) {
         Message message = new Message();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_CHATS, new String[]{KEY_CHAT_UID, KEY_SEQUENCE, KEY_TYPING, KEY_SENDER_NAME, KEY_MESSAGE, KEY_COLOR}, KEY_CHAT_UID + "=? AND " +
@@ -305,7 +305,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //    }
 
     // Getting single contact
-    Boolean IsChatexist(int chat_uid) {
+    public Boolean IsChatexist(int chat_uid) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CHATS, new String[]{KEY_CHAT_UID}, KEY_CHAT_UID + "=? AND " +
@@ -313,13 +313,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null) {
             if (cursor.moveToFirst()) {
 
-                if (cursor.getString(0).equals(String.valueOf(chat_uid))) {
-
-                    return true;
-                } else {
-
-                    return false;
-                }
+                return cursor.getString(0).equals(String.valueOf(chat_uid));
             } else {
                 return false;
             }
@@ -328,20 +322,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    Boolean Ischatindexed(int chat_uid) {
+    public Boolean Ischatindexed(int chat_uid) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_MAIN, new String[]{KEY_CHAT_UID}, KEY_CHAT_UID + "=?", new String[]{String.valueOf(chat_uid)}, null, null, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
 
-                if (cursor.getString(0).equals(String.valueOf(chat_uid))) {
-
-                    return true;
-                } else {
-
-                    return false;
-                }
+                return cursor.getString(0).equals(String.valueOf(chat_uid));
             } else {
                 return false;
             }

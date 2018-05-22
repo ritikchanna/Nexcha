@@ -1,4 +1,4 @@
-package ritik.nexcha;
+package ritik.nexcha.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import ritik.nexcha.Adapter.ChatAdapter;
+import ritik.nexcha.DatabaseHandler;
+import ritik.nexcha.Message;
+import ritik.nexcha.PrefsHelper;
+import ritik.nexcha.R;
 
 public class ChatScreen extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -30,7 +36,7 @@ public class ChatScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_screen);
-        recyclerView = (RecyclerView) findViewById(R.id.chat_recycler_view);
+        recyclerView = findViewById(R.id.chat_recycler_view);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         VerticalSpaceItemDecoration dividerItemDecoration = new VerticalSpaceItemDecoration(50);
@@ -42,7 +48,7 @@ public class ChatScreen extends AppCompatActivity {
         current_category = getIntent().getStringExtra("current_category");
         adapter = new ChatAdapter(this, chat_uid);
         loadprevmsges();
-        nextbutton = (Button) findViewById(R.id.chat_next_button);
+        nextbutton = findViewById(R.id.chat_next_button);
         recyclerView.setAdapter(adapter);
         db = new DatabaseHandler(this);
         nextbutton.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,4 @@
-package ritik.nexcha;
+package ritik.nexcha.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +26,8 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import ritik.nexcha.R;
 
 public class LoginActivity extends Activity {
 

@@ -1,4 +1,4 @@
-package ritik.nexcha;
+package ritik.nexcha.Adapter;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,6 +14,10 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import ritik.nexcha.Constants;
+import ritik.nexcha.GridItem;
+import ritik.nexcha.R;
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     DisplayMetrics displayMetrics;

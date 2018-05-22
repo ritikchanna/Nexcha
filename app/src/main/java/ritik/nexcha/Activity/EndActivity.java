@@ -1,4 +1,4 @@
-package ritik.nexcha;
+package ritik.nexcha.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
+
+import ritik.nexcha.Adapter.GridAdapter;
+import ritik.nexcha.DatabaseHandler;
+import ritik.nexcha.GridItem;
+import ritik.nexcha.GridListner;
+import ritik.nexcha.PrefsHelper;
+import ritik.nexcha.R;
 
 public class EndActivity extends Activity {
     ImageButton closebtn;
@@ -33,7 +40,7 @@ public class EndActivity extends Activity {
         chat_uid = getIntent().getStringExtra("chat_uid");
         current_category = getIntent().getStringExtra("current_category");
         suggestions = db.getsuggestions(Integer.parseInt(chat_uid));
-        closebtn = (ImageButton) findViewById(R.id.close_btn);
+        closebtn = findViewById(R.id.close_btn);
         closebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +48,7 @@ public class EndActivity extends Activity {
                 EndActivity.this.overridePendingTransition(R.anim.slide_down, R.anim.no_change);
             }
         });
-        restart = (Button) findViewById(R.id.restart_btn);
+        restart = findViewById(R.id.restart_btn);
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +60,7 @@ public class EndActivity extends Activity {
                 finish();
             }
         });
-        sharebtn = (Button) findViewById(R.id.share_btn);
+        sharebtn = findViewById(R.id.share_btn);
         sharebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +72,7 @@ public class EndActivity extends Activity {
             }
         });
         i = new Intent(this, Story_cover.class);
-        recyclerview = (RecyclerView) findViewById(R.id.suggestion_recyclerview);
+        recyclerview = findViewById(R.id.suggestion_recyclerview);
         recyclerview.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerview.setLayoutManager(layoutManager);

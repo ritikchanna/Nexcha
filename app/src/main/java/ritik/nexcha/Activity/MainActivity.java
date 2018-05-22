@@ -1,4 +1,4 @@
-package ritik.nexcha;
+package ritik.nexcha.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,6 +42,11 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import ritik.nexcha.Adapter.GridAdapter;
+import ritik.nexcha.DatabaseHandler;
+import ritik.nexcha.GridItem;
+import ritik.nexcha.GridListner;
+import ritik.nexcha.R;
 
 import static ritik.nexcha.Constants.SERVER_URL;
 
@@ -248,6 +253,8 @@ public class MainActivity extends AppCompatActivity
             load_category("popular");
         } else if (id == R.id.nav_reading) {
             load_category("reading");
+        } else if (id == R.id.nav_create) {
+            load_category("create");
         }
 
         return true;
@@ -308,6 +315,10 @@ public class MainActivity extends AppCompatActivity
             current_category = "reading";
 
 
+        } else if (category.equals("create")) {
+            //todo add intent to create activity
+
+
         } else {
 
             story = db.getStoriesbygenre("popular");
@@ -321,7 +332,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    void refresh(String url) throws IOException {
+    void refresh(String url) {
 
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlbuilder = HttpUrl.parse(url).newBuilder();
