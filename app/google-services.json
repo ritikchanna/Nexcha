@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "845622799907",
+    "firebase_url": "https://nexcha-85dec.firebaseio.com",
+    "project_id": "nexcha-85dec",
+    "storage_bucket": "nexcha-85dec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845622799907:android:250c5463cc560502",
+        "android_client_info": {
+          "package_name": "ritik.nexcha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845622799907-rgi8dnhe2ptgnj86rh3ou5qlk0dfmekb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ritik.nexcha",
+            "certificate_hash": "0ef48347e8864aee72bb57d2cd43a61a2b03a086"
+          }
+        },
+        {
+          "client_id": "845622799907-coc0hu8d2omceoc0ul7eghjlubce3i55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJoAalSftHcQ0-OkEG651dcMiJDuFnAxc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845622799907-coc0hu8d2omceoc0ul7eghjlubce3i55.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
